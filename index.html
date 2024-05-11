@@ -71,7 +71,7 @@
                 <ul>
                     <li>
                         <h4>ملخص السلة</h4>
-                        <p><span class="total">10000</span> ر.س</p> <!-- Total -->
+                        <p><span class="total">19999</span> ر.س</p> <!-- Total -->
                     </li>
                     <li>
                         <h4>تكلفة الشحن</h4>
@@ -106,14 +106,19 @@
                     <h2>1</h2>
                     <h3>عنوان الشحن</h3>
                 </button>
-                <section class="trips-content">
+                <section class="trips-content active content">
                     <h2>اضافة عنوان جديد</h2>
                     <form class="trips-form" onsubmit='stopForm(event)'>
 
                         <section class="input-section">
+                            <label for="personalName">الاسم</label>
+                            <input type="text" id="personalName" name="personalName" placeholder="الاسم">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
                             <label for="country">الدولة</label>
                             <input type="text" id="country" name="country" placeholder="الدولة">
-
                             <span class="errorMassege"></span>
                         </section>
 
@@ -160,19 +165,21 @@
                     <h2>2</h2>
                     <h3>شركة الشحن</h3>
                 </button>
-                <section class="trips-company-content">
-                    <form class="trips-company-form">
-                        <input type="radio" name="wipik" id="wipik" checked>
-                        <img src="https://salla-dev-portal.s3.eu-central-1.amazonaws.com/uploads/Yb8ewJGh7fOQpkB741C6bRErn1A7xhHEhFIjhRqF.jpg"
-                            alt="image">
-                        <section>
-                            <h2>ويبك</h2>
-                            <p>من 1 الي 4 أيام</p>
-                        </section>
-                    </form>
-                    <h2>مجاني</h2>
+                <section class="content contetn-trips-company">
+                    <section class="trips-company-content">
+                        <form class="trips-company-form">
+                            <input type="radio" name="wipik" id="wipik" checked>
+                            <img src="https://salla-dev-portal.s3.eu-central-1.amazonaws.com/uploads/Yb8ewJGh7fOQpkB741C6bRErn1A7xhHEhFIjhRqF.jpg"
+                                alt="image">
+                            <section>
+                                <h2>ويبك</h2>
+                                <p>من 1 الي 4 أيام</p>
+                            </section>
+                        </form>
+                        <h2>مجاني</h2>
+                    </section>
+                    <input type="submit" value="حفظ" class="trips-company-form-btn">
                 </section>
-                <input type="submit" value="حفظ" class="trips-company-form-btn">
             </section>
             <!-- شركة الشحن -->
 
@@ -183,7 +190,7 @@
                     <h3>الدفع</h3>
                 </button>
 
-                <section class="pay-content">
+                <section class="pay-content content">
                     <form class="cards">
 
                         <section class="card">
@@ -236,21 +243,22 @@
                                 <select name="installmentBy" id="installmentBy">
                                     <option value="نقدا">نقدا</option>
                                 </select>
+                                <span class="alert">يسمح بالتقسيط في حالة كان اجمالي المبلغ 1000 ر.س او اكثر</span>
                             </section>
 
                             <section>
                                 <label for="firstPayment">مبلغ الدفعة الأولي</label>
-                                <input type="text" id="firstPayment" value="1000 ر.س" disabled>
+                                <input type="text" id="firstPayment" name="firstPayment" value="1000 ر.س" disabled>
                             </section>
 
                             <section>
                                 <label for="monthlyPayment">إجمالي الدفعة الشهرية</label>
-                                <input type="text" id="monthlyPayment" disabled>
+                                <input type="text" id="monthlyPayment" name="monthlyPayment" disabled>
                             </section>
 
                             <section>
                                 <label for="residual">اجمالي المبلغ المتبقي</label>
-                                <input type="text" id="residual" disabled>
+                                <input type="text" id="residual" name="residual" disabled>
                             </section>
                         </form>
 
@@ -271,6 +279,14 @@
 
                     <section class="pay-det">
                         <form class="pay-by-visa">
+                            <input type="hidden" id="personalName2" name="personalName2" placeholder="الاسم" disabled>
+
+                            <input type="hidden" id="firstPayment2" name="firstPayment2" value="1000 ر.س" disabled>
+
+                            <input type="hidden" id="monthlyPayment2" name="monthlyPayment2" disabled>
+
+                            <input type="hidden" id="residual2" name="residual2" disabled>
+
                             <input type="hidden" id="country2" name="country2" placeholder="الدولة">
 
                             <input type="hidden" id="City2" name="City2" placeholder="المدينة">
@@ -329,6 +345,14 @@
                                 </h6>
                             </section>
                             <form class="pay2">
+                                <input type="hidden" id="personalName3" name="personalName" disabled>
+
+                                <input type="hidden" id="firstPayment3" name="firstPayment3" value="1000 ر.س" disabled>
+
+                                <input type="hidden" id="monthlyPayment3" name="monthlyPayment3" disabled>
+
+                                <input type="hidden" id="residual3" name="residual3" disabled>
+
                                 <input type="hidden" id="country3" name="country3" placeholder="الدولة">
 
                                 <input type="hidden" id="City3" name="City3" placeholder="المدينة">
@@ -347,6 +371,13 @@
                                     <input type="text" name="name" id="name" placeholder="اسم صاحب الحساب المحول منه">
                                     <span class="errorMassege"></span>
                                 </section>
+                                <label for="image">ارفاق صورة لايصال التحويل</label>
+                                <div class="wrapper">
+                                    <div class="file-upload">
+                                        <input type="file" id="image"/>
+                                        <i class="fa fa-arrow-up"></i>
+                                    </div>
+                                </div>
                                 <input type="submit" value="دفع" class="pay2-btn">
                             </form>
                         </section>

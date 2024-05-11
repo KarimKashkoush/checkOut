@@ -1,5 +1,8 @@
 let tripsForm = document.querySelector(".trips-form"),
     tripsCompanyBtn = document.querySelector(".trips-company-form-btn"),
+    personalName = document.getElementById("personalName"),
+    personalName2 = document.getElementById("personalName2"),
+    personalName3 = document.getElementById("personalName3"),
     country = document.getElementById("country"),
     City = document.getElementById("City"),
     neighborhood = document.getElementById("neighborhood"),
@@ -11,7 +14,8 @@ let valid1 = false,
     valid2 = false,
     valid3 = false,
     valid4 = false,
-    valid5 = false;
+    valid5 = false,
+    valid6 = false;
 
 let country2 = document.getElementById("country2"),
     City2 = document.getElementById("City2"),
@@ -145,33 +149,43 @@ function openCartSummry() {
 // Satrt Validation Trips Form
 
 
+let personalNameCheck = personalName.onchange = () => {
+    if (personalName.value.trim() == "") {
+        setError(personalName, "من فضلك أدخل اسم الدولة")
+        valid1 = false
+    } else {
+        setSuccess(personalName)
+        valid1 = true
+    }
+}
+
 let countryCheck = country.onchange = () => {
     if (country.value.trim() == "") {
         setError(country, "من فضلك أدخل اسم الدولة")
-        valid1 = false
+        valid2 = false
     } else {
         setSuccess(country)
-        valid1 = true
+        valid2 = true
     }
 }
 
 let CityCheck = City.onchange = () => {
     if (City.value.trim() == "") {
         setError(City, "من فضلك أدخل اسم المدينة")
-        valid2 = false
+        valid3 = false
     } else {
         setSuccess(City)
-        valid2 = true
+        valid3 = true
     }
 }
 
 let neighborhoodCheck = neighborhood.onchange = () => {
     if (neighborhood.value.trim() == "") {
         setError(neighborhood, "من فضلك أدخل اسم الحي")
-        valid3 = false
+        valid4 = false
     } else {
         setSuccess(neighborhood)
-        valid3 = true
+        valid4 = true
     }
 }
 
@@ -181,30 +195,33 @@ let streetCheck = street.onchange = () => {
         valid5 = false
     } else {
         setSuccess(street)
-        valid4 = true
+        valid5 = true
     }
 }
 
 let phoneNumberCheck = phoneNumber.onchange = () => {
     if (phoneNumber.value.trim() == "") {
         setError(phoneNumber, "من فضلك أدخل رقم الهاتف")
-        valid5 = false
+        valid6 = false
     } else {
         setSuccess(phoneNumber)
-        valid5 = true
+        valid6 = true
     }
 }
 
 tripsFormBtn.onclick = () => {
+    personalNameCheck()
     countryCheck()
     CityCheck()
     neighborhoodCheck()
     streetCheck()
     phoneNumberCheck()
 
-    if (valid1 && valid2 && valid3 && valid4 && valid5) {
-        document.querySelector(".trips").classList.toggle("active");
-        document.querySelector(".trips-company").classList.toggle("active");
+    if (valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
+        document.querySelector(".trips").classList.remove("active");
+        document.querySelector(".trips-content").classList.remove("active");
+        document.querySelector(".trips-company").classList.add("active");
+        document.querySelector(".contetn-trips-company").classList.add("active");
     }
 }
 // Satrt Validation Trips Form
@@ -212,8 +229,10 @@ tripsFormBtn.onclick = () => {
 
 // Start Company Trips
 tripsCompanyBtn.onclick = () => {
-    document.querySelector(".trips-company").classList.remove("active");
+    document.querySelector(".contetn-trips-company").classList.remove("active")
+    document.querySelector(".trips-company").classList.remove("active")
     document.querySelector(".pay").classList.add("active");
+    document.querySelector(".pay-content").classList.add("active")
 }
 // End Company Trips
 
@@ -221,12 +240,14 @@ tripsCompanyBtn.onclick = () => {
 
 
 tripsForm.onchange = () => {
-    if (valid1 && valid2 && valid3 && valid4 && valid5) {
+    if (valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
         tripsFormBtn.classList.add("active")
     } else {
         tripsFormBtn.classList.remove("active")
     };
 
+    personalName2.value = personalName.value;
+    personalName3.value = personalName.value;
     country2.value = country.value;
     City2.value = City.value;
     street2.value = street.value;
@@ -241,47 +262,31 @@ tripsForm.onchange = () => {
     extraNumber3.value = extraNumber.value;
 }
 // Validation
-let valid6 = false,
-    valid7 = false,
+let valid7 = false,
     valid8 = false,
-    valid9 = false;
+    valid9 = false,
+    valid10 = false;
 
 
 let cardNumberCheck = cardNumber.onchange = () => {
     if (cardNumber.value.trim() == "") {
         setError(cardNumber, "رقم البطاقة مطلوب")
-        valid6 = false;
+        valid7 = false;
     } else if (cardNumber.value.trim().length != 16) {
         setError(cardNumber, "البيانات المدخلة خطأ (تحتوي البطاقة علي 16 رقم)")
-        valid6 = false;
+        valid7 = false;
     } else {
         setSuccess(cardNumber);
-        valid6 = true;
+        valid7 = true;
     }
 }
 
 let monthCheck = month.onchange = () => {
     if (month.value.trim() == "") {
-        valid7 = false;
-        exp.classList.add("error")
-        exp.classList.remove("success")
-    } else if (month.value.trim().length > 2 || month.value.trim().length <= 0) {
-        exp.classList.add("error")
-        exp.classList.remove("success")
-        valid7 = false;
-    } else {
-        exp.classList.add("success")
-        exp.classList.remove("error")
-        valid7 = true;
-    }
-}
-
-let yearCheck = year.onchange = () => {
-    if (year.value.trim() == "") {
         valid8 = false;
         exp.classList.add("error")
         exp.classList.remove("success")
-    } else if (year.value.trim().length > 4 || year.value.trim().length < 0) {
+    } else if (month.value.trim().length > 2 || month.value.trim().length <= 0) {
         exp.classList.add("error")
         exp.classList.remove("success")
         valid8 = false;
@@ -292,27 +297,43 @@ let yearCheck = year.onchange = () => {
     }
 }
 
-let cvvCheck = cvv.onchange = () => {
-    if (cvv.value.trim() == "") {
-        setError(cvv, "هذا الحقل مطلوب")
+let yearCheck = year.onchange = () => {
+    if (year.value.trim() == "") {
         valid9 = false;
-    } else if (cvv.value.trim().length != 3) {
-        setError(cvv, "البيانات المدخلة خطأ (يتكون من 3 أرقام)")
+        exp.classList.add("error")
+        exp.classList.remove("success")
+    } else if (year.value.trim().length > 4 || year.value.trim().length < 0) {
+        exp.classList.add("error")
+        exp.classList.remove("success")
         valid9 = false;
     } else {
-        setSuccess(cvv);
+        exp.classList.add("success")
+        exp.classList.remove("error")
         valid9 = true;
     }
 }
 
+let cvvCheck = cvv.onchange = () => {
+    if (cvv.value.trim() == "") {
+        setError(cvv, "هذا الحقل مطلوب")
+        valid10 = false;
+    } else if (cvv.value.trim().length != 3) {
+        setError(cvv, "البيانات المدخلة خطأ (يتكون من 3 أرقام)")
+        valid10 = false;
+    } else {
+        setSuccess(cvv);
+        valid10 = true;
+    }
+}
+
 payForm.onsubmit = (e) => {
-    if (!(valid1 && valid2 && valid3 && valid4 && valid5 && valid6 && valid7 && valid8 && valid9)) {
+    if (!(valid1 && valid2 && valid3 && valid4 && valid5 && valid6 && valid7 && valid8 && valid9 && valid10)) {
         e.preventDefault()
     }
 }
 
 payForm.onchange = () => {
-    if (valid6 && valid7 && valid8 && valid9) {
+    if (valid7 && valid8 && valid9 && valid10) {
         payBtn.classList.add("active")
     } else {
         payBtn.classList.remove("active")
@@ -326,9 +347,9 @@ payBtn.onclick = () => {
     cvvCheck()
 }
 
-let aa = document.querySelectorAll("input[name='trans']")
+let trnasInputs = document.querySelectorAll("input[name='trans']")
 payForm2.style.display = "none"
-aa.forEach((i) => {
+trnasInputs.forEach((i) => {
     i.onclick = () => {
         if (i.value == "transfare") {
             payForm.style.display = "none";
@@ -342,16 +363,16 @@ aa.forEach((i) => {
 // Start Open & Close Sections
 let btn = document.querySelectorAll(".section-title");
 
-let trips = document.getElementById("trips");
-let tripsCompany = document.getElementById("tripsCompany");
-let payDet = document.getElementById("payDet");
-
-btn.forEach((i) => {
-    i.onclick = () => {
-        let parent = i.parentElement;
-        parent.classList.toggle("active");
-    }
-})
+// if (valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
+    btn.forEach((i) => {
+        i.onclick = () => {
+            let parent = i.parentElement;
+            parent.classList.toggle("active");
+            let ele = parent.querySelector(".content")
+            ele.classList.toggle("active")
+        }
+    })
+// }
 
 // End Open & Close Sections
 
@@ -364,7 +385,7 @@ let acountTransferNameCheck = acountTransferName.onchange = () => {
     } else {
         setSuccess(acountTransferName)
         nameValid = true;
-        if (!nameValid && valid1 && valid2 && valid3 && valid4 && valid5) {
+        if (!nameValid && valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
             pay2Btn.classList.add("active");
         }
     }
@@ -372,7 +393,7 @@ let acountTransferNameCheck = acountTransferName.onchange = () => {
 
 pay2Btn.onclick = (e) => {
     acountTransferNameCheck()
-    if (!(nameValid && valid1 && valid2 && valid3 && valid4 && valid5)) {
+    if (!(nameValid && valid1 && valid2 && valid3 && valid4 && valid5 && valid6)) {
         e.preventDefault(e)
         pay2Btn.classList.remove("active");
     }
@@ -382,67 +403,81 @@ pay2Btn.onclick = (e) => {
 
 let installmentBy = document.getElementById("installmentBy");
 let firstPayment = document.getElementById("firstPayment");
+let monthlyPayment2 = document.getElementById("monthlyPayment2");
+let residual2 = document.getElementById("residual2");
+let monthlyPayment3 = document.getElementById("monthlyPayment3");
+let residual3 = document.getElementById("residual3");
 let monthlyPayment = document.getElementById("monthlyPayment");
 let residual = document.getElementById("residual");
 let tableMonthlyPayment = document.getElementById("tablePayment")
 
-for (let i = 1; i < 25; i++) {
-    const option = document.createElement("option");
-    option.value = `${i} شهر`;
-    option.innerHTML = `${i} شهر`;
-    installmentBy.appendChild(option);
-}
+if (total >= 1000) {
+    for (let i = 1; i < 25; i++) {
+        const option = document.createElement("option");
+        option.value = `${i} شهر`;
+        option.innerHTML = `${i} شهر`;
+        installmentBy.appendChild(option);
+    }
 
-if (installmentBy.value == "نقدا") {
-    monthlyPayment.parentElement.style.display = "none";
-    residual.parentElement.style.display = "none";
-    firstPayment.parentElement.style.display = "none";
-    tableMonthlyPayment.style.display = "none";
-}
-
-residual.value = `${total - 1000} ر.س`;
-
-installmentBy.onchange = function () {
     if (installmentBy.value == "نقدا") {
         monthlyPayment.parentElement.style.display = "none";
         residual.parentElement.style.display = "none";
         firstPayment.parentElement.style.display = "none";
         tableMonthlyPayment.style.display = "none";
-    } else {
-        monthlyPayment.parentElement.style.display = "block";
-        residual.parentElement.style.display = "block";
-        firstPayment.parentElement.style.display = "block";
-        tableMonthlyPayment.style.display = "table";
     }
 
-    const today = new Date();
+    residual.value = `${total - 1000} ر.س`;
+    residual2.value = `${total - 1000} ر.س`;
+    residual3.value = `${total - 1000} ر.س`;
 
-    let year = today.getFullYear();
-    let month = today.getMonth();
-    let day = today.getDate();
-
-    const monthlyInstallment = parseInt(residual.value) / parseInt(installmentBy.value);
-
-    monthlyPayment.value = `${monthlyInstallment.toFixed(2)} ر.س`;
-
-    let table = "";
-    for (let i = 1; i <= parseInt(installmentBy.value); i++) {
-        month += 1;
-        if (month > 12) {
-            month = 1;
-            year += 1;
+    installmentBy.onchange = function () {
+        if (installmentBy.value == "نقدا") {
+            monthlyPayment.parentElement.style.display = "none";
+            residual.parentElement.style.display = "none";
+            firstPayment.parentElement.style.display = "none";
+            tableMonthlyPayment.style.display = "none";
+        } else {
+            monthlyPayment.parentElement.style.display = "block";
+            residual.parentElement.style.display = "block";
+            firstPayment.parentElement.style.display = "block";
+            tableMonthlyPayment.style.display = "table";
         }
 
-        let date = `${day} / ${month + 1} / ${year}`;
+        const today = new Date();
 
-        table += `
-        <tr style="border-bottom: 1px solid #ccc;">
-            <td>${i}</td>
-            <td dir="ltr">${date}</td>
-            <td>${monthlyInstallment.toFixed(2)}</td>
-        </tr>
-        `;
-    }
+        let year = today.getFullYear();
+        let month = today.getMonth();
+        let day = today.getDate();
 
-    document.getElementById("tbody").innerHTML = table;
-};
+        const monthlyInstallment = parseInt(residual.value) / parseInt(installmentBy.value);
+
+        monthlyPayment.value = `${monthlyInstallment.toFixed(2)} ر.س`;
+        monthlyPayment2.value = `${monthlyInstallment.toFixed(2)} ر.س`;
+        monthlyPayment3.value = `${monthlyInstallment.toFixed(2)} ر.س`;
+
+        let table = "";
+        for (let i = 1; i <= parseInt(installmentBy.value); i++) {
+            month += 1;
+            if (month > 12) {
+                month = 1;
+                year += 1;
+            }
+
+            let date = `${day} / ${month + 1} / ${year}`;
+
+            table += `
+            <tr style="border-bottom: 1px solid #ccc;">
+                <td>${i}</td>
+                <td dir="ltr">${date}</td>
+                <td>${monthlyInstallment.toFixed(2)}</td>
+            </tr>
+            `;
+        }
+        document.getElementById("tbody").innerHTML = table;
+    };
+} else {
+    monthlyPayment.parentElement.style.display = "none";
+    residual.parentElement.style.display = "none";
+    firstPayment.parentElement.style.display = "none";
+    tableMonthlyPayment.style.display = "none";
+}

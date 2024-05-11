@@ -39,7 +39,7 @@ ul {
 }
 
 input,
-button, 
+button,
 select {
     color: var(--main-color);
     font-family: "Cairo", sans-serif;
@@ -79,7 +79,8 @@ select {
     width: 100%;
     background-color: transparent;
     cursor: pointer;
-    margin-bottom: 15px;
+    height: 50px;
+    /* padding-bottom: 10px; */
 }
 
 .section-title>h2 {
@@ -101,9 +102,9 @@ select {
     background-color: #86c2ce;
 }
 
-.sec:not(:last-child) {
+.sec {
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
+    margin-block: 10px;
 }
 
 /* Start Header */
@@ -322,32 +323,27 @@ select {
     padding-block: 15px;
 }
 
-.main .container>section:not(:last-child) {
-    margin-bottom: 15px;
-}
 
 .trips {
-    height: 65px;
     overflow: hidden;
     transition: 0.5s ease;
 }
 
-.trips.active {
-    height: 520px;
-    overflow: auto;
-}
-
-@media (max-width: 650px) {
-    .trips.active {
-        height: 950px;
-    }
-
-}
 
 .trips-content {
-    border: 1px dashed #9999999c;
     border-radius: 15px;
+    height: 0;
+    overflow: hidden;
+    transition: 0.5s ease;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.trips-content.active {
+    border: 1px dashed #9999999c;
     padding: 15px;
+    height: 519px;
+    overflow: auto;
 }
 
 .trips-content>h2 {
@@ -407,19 +403,22 @@ select {
 }
 
 
-.trips-content form>.input-section:not(:nth-child(6)) label::after {
+.trips-content form>.input-section:not(:nth-child(7)) label::after {
     content: "*";
     color: red;
 }
 
-.trips-company {
-    height: 65px;
+
+.trips-company .content {
     overflow: hidden;
+    margin-top: 15px;
+    height: 0;
     transition: 0.5s ease;
 }
 
-.trips-company.active {
-    height: 200px;
+.trips-company .content.active {
+    height: 127px;
+    overflow: auto;
 }
 
 .trips-company-content {
@@ -442,12 +441,8 @@ select {
     border-radius: 8px;
     width: 100%;
     margin-top: 20px;
-    background-color: #999999;
     color: #fff;
     cursor: auto;
-}
-
-.trips-company-form-btn.active {
     cursor: pointer;
     background-color: #86c2ce;
 }
@@ -478,20 +473,21 @@ select {
 
 /* Start Pay */
 
-.pay {
-    height: 50px;
+.pay .container {
+    margin-bottom: 15px;
+}
+
+.pay-content {
+    margin-top: 15px;
+    height: 0;
     overflow: hidden;
     transition: 0.5s ease;
 }
 
-.pay.active {
-    height: 400px;
+.pay-content.active {
+    height: 600px;
     overflow: auto;
-    transition: 0.3s ease;
-}
-
-.pay .container {
-    margin-bottom: 15px;
+    margin-top: 15px;
 }
 
 .cards {
@@ -688,21 +684,22 @@ select {
     border: 1px solid var(--border-color);
     border-radius: 15px;
 }
+
 .payment-data form {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
 }
 
-.payment-data form > section {
+.payment-data form>section {
     width: calc((100% / 3) - 10px);
 }
 
-.payment-data form > section:first-child {
+.payment-data form>section:first-child {
     width: 100%;
 }
 
-.payment-data form > section input, 
+.payment-data form>section input,
 select {
     border: 1px solid var(--border-color);
     width: 100%;
@@ -713,20 +710,20 @@ select {
     outline: none;
 }
 
-.payment-data form > section label{
+.payment-data form>section label {
     display: block;
     font-size: 14px;
     margin-top: 5px;
 }
 
 @media (max-width: 650px) {
-    .payment-data form > section {
+    .payment-data form>section {
         width: calc((100% / 2) - 10px);
     }
 }
 
 @media (max-width: 450px) {
-    .payment-data form > section {
+    .payment-data form>section {
         width: 100%;
     }
 }
@@ -750,6 +747,15 @@ select {
 td {
     padding-inline: 10px;
 }
+
+.alert {
+    color: #f55157;
+    background-color: rgba(245, 81, 87, .05);
+    font-size: 12px;
+    padding: 1px 15px 4px;
+    border-radius: 50px;
+}
+
 /* End Main */
 
 /* Form Validation */
@@ -759,4 +765,56 @@ td {
 
 .success {
     border-color: #2196f3 !important;
+}
+
+
+
+.wrapper {
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    .file-upload {
+
+        height: 200px;
+        width: 200px;
+        border-radius: 100px;
+        position: relative;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        border: 4px solid #FFFFFF;
+        overflow: hidden;
+        background-image: linear-gradient(to bottom, #2f5961 50%, #FFFFFF 50%);
+        background-size: 100% 200%;
+        transition: all 1s;
+        color: #FFFFFF;
+        font-size: 100px;
+
+        input[type='file'] {
+
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            cursor: pointer;
+
+        }
+
+        &:hover {
+
+            background-position: 0 -100%;
+
+            color: #2f5961;
+
+        }
+    }
 }
