@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>check out</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body>
+
+    <!-- Start Header -->
+    <!-- بداية رأس الصفحة -->
+    <section class="header">
+        <section class="container">
+            <section class="details-page">
+                <section class="image">
+                    <a href="index.html"><img src="https://cdn.salla.sa/xpxep/G1eHyibUU47O3gFsoeow5mvbL0Ln6ZkaSrBE0p1N.png"
+                            alt="image"></a>
+                </section>
+                <section>
+                    <h2>مرحبا بك, Karim Kashkoush</h2>
+                    <p> <a href="#">اي جي ستور</a> <span>/</span> <a href="#">سلة المشتريات</a> <span>/</span>
+                        <span>إتمام الطلب</span>
+                    </p>
+                </section>
+            </section>
+            <section class="timer">
+                <section class="contect-timer">
+                    <section class="sec">
+                        <p id="sec">00</p>
+                        <span>ثانية</span>
+                    </section>
+                    <section class="cd-sep">
+                        :
+                    </section>
+                    <section class="min">
+                        <p id="min">00</p>
+                        <span>دقيقة</span>
+                    </section>
+                    <section class="cd-sep">
+                        :
+                    </section>
+                    <section class="hours">
+                        <p id="hrs">00</p>
+                        <span>ساعة</span>
+                    </section>
+                    <section class="cd-sep">
+                        :
+                    </section>
+                    <section class="days">
+                        <p id="days">00</p>
+                        <span>يوم</span>
+                    </section>
+                </section>
+                <h5>الوقت المتبقي للاستفادة من العرض</h5>
+            </section>
+        </section>
+    </section>
+    <!-- نهاية رأس الصفحة -->
+    <!-- End Header -->
+
+    <!-- Start request -->
+    <!-- بداية الطلب -->
+    <section class="request">
+        <section class="container">
+            <section class="cart-summry">
+                <ul>
+                    <li>
+                        <h4>ملخص السلة</h4>
+                        <p><span class="total">278.00</span> ر.س</p> <!-- Total -->
+                    </li>
+                    <li>
+                        <h4>تكلفة الشحن</h4>
+                        <p>مجاني</p>
+                    </li>
+                </ul>
+            </section>
+            <section class="final-total">
+                <h2>اجمالي الطلب</h2>
+                <h2><span id="finalTotal">00</span> ر.س</h2>
+            </section>
+            <section class="coupon">
+                <button onclick="openCoupon()">هل لديك كوبون ؟</button>
+                <form onsubmit='stopForm(event)'>
+                    <input type="text" placeholder="أدخل رمز الكوبون" id="couponCode">
+                    <button class="coupon-btn" id="couponBtn">تطبيق</button>
+                    <span class="errorMassege"></span>
+                </form>
+            </section>
+            <button class="invoice-details" onclick="openCartSummry()">تفاصيل الفاتورة</button>
+        </section>
+    </section>
+    <!-- بداية الطلب -->
+    <!-- Start request -->
+
+    <!-- بدء معلومات الشحن والدفع -->
+    <section class="main">
+        <section class="container">
+            <!-- بداية معلومات الشحن -->
+            <section class="trips active sec">
+                <button class="section-title" id="trips">
+                    <h2>1</h2>
+                    <h3>عنوان الشحن</h3>
+                </button>
+                <section class="trips-content">
+                    <h2>اضافة عنوان جديد</h2>
+                    <form class="trips-form" onsubmit='stopForm(event)'>
+
+                        <section class="input-section">
+                            <label for="country">الدولة</label>
+                            <input type="text" id="country" name="country" placeholder="الدولة">
+
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
+                            <label for="City">المدينة</label>
+                            <input type="text" id="City" name="City" placeholder="المدينة">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
+                            <label for="neighborhood">الحي</label>
+                            <input type="text" id="neighborhood" name="neighborhood" placeholder="الحي">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
+                            <label for="street">الشارع</label>
+                            <input type="text" id="street" name="street" placeholder="الشارع">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
+                            <label for="number">رقم الهاتف</label>
+                            <input type="text" id="phoneNumber" name="number" placeholder="رقم الهاتف">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <section class="input-section">
+                            <label for="extraNumber">رقم الهاتف الثاني (اختياري)</label>
+                            <input type="text" id="extraNumber" name="extraNumber"
+                                placeholder="رقم الهاتف الثاني (اختياري)">
+                            <span class="errorMassege"></span>
+                        </section>
+
+                        <input type="submit" value="حفظ" id="tripsFormBtn">
+                    </form>
+                </section>
+            </section>
+            <!-- نهاية معلومات الشحن -->
+
+            <!-- شركة الشحن -->
+            <section class="trips-company sec">
+                <button class="section-title" id="tripsCompany">
+                    <h2>2</h2>
+                    <h3>شركة الشحن</h3>
+                </button>
+                <section class="trips-company-content">
+                    <form class="trips-company-form">
+                        <input type="radio" name="wipik" id="wipik" checked>
+                        <img src="https://salla-dev-portal.s3.eu-central-1.amazonaws.com/uploads/Yb8ewJGh7fOQpkB741C6bRErn1A7xhHEhFIjhRqF.jpg"
+                            alt="image">
+                        <section>
+                            <h2>ويبك</h2>
+                            <p>من 1 الي 4 أيام</p>
+                        </section>
+                    </form>
+                    <h2>مجاني</h2>
+                </section>
+                <input type="submit" value="حفظ" class="trips-company-form-btn">
+            </section>
+            <!-- شركة الشحن -->
+
+            <!-- بيانات الدفع -->
+            <section class="pay sec">
+                <button class="section-title">
+                    <h2>3</h2>
+                    <h3>الدفع</h3>
+                </button>
+
+                <section class="pay-content">
+                    <form class="cards">
+
+                        <section class="card">
+                            <input type="radio" name="trans" id="mada" value="mada" checked>
+                            <label for="mada">
+                                <img src="https://cdn.assets.salla.network/stores/vendor/checkout/images/icons/pay-option-mada.svg"
+                                    alt="img">
+                            </label>
+                        </section>
+
+                        <section class="card">
+                            <input type="radio" name="trans" id="visa" value="visa">
+                            <label for="visa">
+                                <img src="https://cdn.assets.salla.network/stores/vendor/checkout/images/icons/pay-option-credit-2.svg"
+                                    alt="img">
+                            </label>
+                        </section>
+
+                        <section class="card">
+                            <input type="radio" name="trans" id="tamara" value="tamara">
+                            <label for="tamara">
+                                <img src="https://cdn.assets.salla.network/stores/vendor/checkout/images/icons/tamara/ar-tamara-label.svg"
+                                    alt="img">
+                            </label>
+                        </section>
+
+                        <section class="card" for="tabby">
+                            <input type="radio" name="trans" id="tabby" value="tabby">
+                            <label for="tabby">
+                                <img src="https://cdn.assets.salla.network/stores/vendor/checkout/images/icons/pay-option-tabby_en.png?v=0.0.1"
+                                    alt="img">
+                            </label>
+                        </section>
+
+                        <section class="card">
+                            <input type="radio" name="trans" id="trans" value="transfare">
+                            <label for="trans">
+                                <img src="https://cdn.assets.salla.network/stores/vendor/checkout/images/icons/pay-option-bank-acc.svg"
+                                    alt="img">
+
+                                <p>تحويل بنكي</p>
+                            </label>
+                        </section>
+                    </form>
+
+                    
+
+                    <section class="pay-det">
+                        <form class="pay-by-visa">
+                            <input type="hidden" id="country2" name="country2" placeholder="الدولة">
+
+                            <input type="hidden" id="City2" name="City2" placeholder="المدينة">
+
+                            <input type="hidden" id="neighborhood2" name="neighborhood2" placeholder="الحي">
+
+                            <input type="hidden" id="street2" name="street2" placeholder="الشارع">
+
+                            <input type="hidden" id="phoneNumber2" name="number2" placeholder="رقم الهاتف">
+
+                            <input type="hidden" id="extraNumber2" name="extraNumber2"
+                                placeholder="رقم الهاتف الثاني (اختياري)">
+
+                            <section class="input-section card-number">
+                                <label for="cardNumber">رقم البطاقة</label>
+                                <input type="number" name="cardNumber" id="cardNumber" placeholder="رقم البطاقة">
+                                <span class="errorMassege"></span>
+                            </section>
+
+                            <section class="input-section">
+                                <label for="exp">تاريخ الانتهاء</label>
+                                <section class="exp">
+                                    <input type="number" placeholder="السنة" id="year" required>
+                                    <input type="number" name="exp" id="exp" placeholder="/" disabled>
+                                    <input type="number" placeholder="الشهر" id="month" required>
+                                </section>
+                                <span class="errorMassege"></span>
+                            </section>
+
+                            <section class="input-section">
+                                <label for="cvv">رمز التحقق (cvv)</label>
+                                <input type="number" name="cvv" id="cvv" placeholder="رمز التحقق (cvv)">
+                                <span class="errorMassege"></span>
+                            </section>
+
+                            <input type="submit" value="دفع" id="payBtn">
+                        </form>
+                        <section class="pay-by-trans">
+                            <section class="bank-acount">
+                                <section class="box">
+                                    <p>صاحب الحساب</p>
+                                    <h2>kariiiiiiiim</h2>
+                                </section>
+                                <section class="box">
+                                    <p>رقم الحساب</p>
+                                    <h2>0000000</h2>
+                                </section>
+                                <section class="box">
+                                    <p>رقم الآيبان</p>
+                                    <h2>0000000</h2>
+                                </section>
+                            </section>
+                            <section class="after-transfer">
+                                <p>معلومات بعد التحويل</p>
+                                <h6>يجب ارفاق صوره من ايصال التحويل البنكي واسم الذي قام بالتحويل حتى يتم قبول الطلب
+                                </h6>
+                            </section>
+                            <form class="pay2">
+                                <input type="hidden" id="country3" name="country3" placeholder="الدولة">
+
+                                <input type="hidden" id="City3" name="City3" placeholder="المدينة">
+
+                                <input type="hidden" id="neighborhood3" name="neighborhood3" placeholder="الحي">
+
+                                <input type="hidden" id="street3" name="street3" placeholder="الشارع">
+
+                                <input type="hidden" id="phoneNumber3" name="number3" placeholder="رقم الهاتف">
+
+                                <input type="hidden" id="extraNumber3" name="extraNumber3"
+                                    placeholder="رقم الهاتف الثاني (اختياري)">
+
+                                <section>
+                                    <label for="name">اسم صاحب الحساب المحول منه</label>
+                                    <input type="text" name="name" id="name" placeholder="اسم صاحب الحساب المحول منه">
+                                    <span class="errorMassege"></span>
+                                </section>
+                                <input type="submit" value="دفع" class="pay2-btn">
+                            </form>
+                        </section>
+                    </section>
+                </section>
+            </section>
+
+            <!-- بيانات الدفع -->
+        </section>
+    </section>
+    <!-- نهاية معلومات الشحن والدفع -->
+
+    <script src="main.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>
