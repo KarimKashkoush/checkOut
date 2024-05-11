@@ -380,4 +380,69 @@ pay2Btn.onclick = (e) => {
 
 
 
+let installmentBy = document.getElementById("installmentBy");
+let firstPayment = document.getElementById("firstPayment");
+let monthlyPayment = document.getElementById("monthlyPayment");
+let residual = document.getElementById("residual");
+let tableMonthlyPayment = document.getElementById("tablePayment")
 
+for (let i = 1; i < 25; i++) {
+    const option = document.createElement("option");
+    option.value = `${i} شهر`;
+    option.innerHTML = `${i} شهر`;
+    installmentBy.appendChild(option);
+}
+
+if (installmentBy.value == "نقدا") {
+    monthlyPayment.parentElement.style.display = "none";
+    residual.parentElement.style.display = "none";
+    firstPayment.parentElement.style.display = "none";
+    tableMonthlyPayment.style.display = "none";
+}
+
+residual.value = `${total - 1000} ر.س`;
+
+installmentBy.onchange = function () {
+    if (installmentBy.value == "نقدا") {
+        monthlyPayment.parentElement.style.display = "none";
+        residual.parentElement.style.display = "none";
+        firstPayment.parentElement.style.display = "none";
+        tableMonthlyPayment.style.display = "none";
+    } else {
+        monthlyPayment.parentElement.style.display = "block";
+        residual.parentElement.style.display = "block";
+        firstPayment.parentElement.style.display = "block";
+        tableMonthlyPayment.style.display = "table";
+    }
+
+    const today = new Date();
+
+    let year = today.getFullYear();
+    let month = today.getMonth();
+    let day = today.getDate();
+
+    const monthlyInstallment = parseInt(residual.value) / parseInt(installmentBy.value);
+
+    monthlyPayment.value = `${monthlyInstallment.toFixed(2)} ر.س`;
+
+    let table = "";
+    for (let i = 1; i <= parseInt(installmentBy.value); i++) {
+        month += 1;
+        if (month > 12) {
+            month = 1;
+            year += 1;
+        }
+
+        let date = `${day} / ${month + 1} / ${year}`;
+
+        table += `
+        <tr style="border-bottom: 1px solid #ccc;">
+            <td>${i}</td>
+            <td dir="ltr">${date}</td>
+            <td>${monthlyInstallment.toFixed(2)}</td>
+        </tr>
+        `;
+    }
+
+    document.getElementById("tbody").innerHTML = table;
+};

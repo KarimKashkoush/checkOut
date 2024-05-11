@@ -17,7 +17,8 @@
         <section class="container">
             <section class="details-page">
                 <section class="image">
-                    <a href="index.html"><img src="https://cdn.salla.sa/xpxep/G1eHyibUU47O3gFsoeow5mvbL0Ln6ZkaSrBE0p1N.png"
+                    <a href="index.html"><img
+                            src="https://cdn.salla.sa/xpxep/G1eHyibUU47O3gFsoeow5mvbL0Ln6ZkaSrBE0p1N.png"
                             alt="image"></a>
                 </section>
                 <section>
@@ -70,7 +71,7 @@
                 <ul>
                     <li>
                         <h4>ملخص السلة</h4>
-                        <p><span class="total">278.00</span> ر.س</p> <!-- Total -->
+                        <p><span class="total">10000</span> ر.س</p> <!-- Total -->
                     </li>
                     <li>
                         <h4>تكلفة الشحن</h4>
@@ -228,7 +229,45 @@
                         </section>
                     </form>
 
-                    
+                    <section class="payment-data">
+                        <form>
+                            <section>
+                                <label for="installmentBy">الدفع/التقسيط علي:</label>
+                                <select name="installmentBy" id="installmentBy">
+                                    <option value="نقدا">نقدا</option>
+                                </select>
+                            </section>
+
+                            <section>
+                                <label for="firstPayment">مبلغ الدفعة الأولي</label>
+                                <input type="text" id="firstPayment" value="1000 ر.س" disabled>
+                            </section>
+
+                            <section>
+                                <label for="monthlyPayment">إجمالي الدفعة الشهرية</label>
+                                <input type="text" id="monthlyPayment" disabled>
+                            </section>
+
+                            <section>
+                                <label for="residual">اجمالي المبلغ المتبقي</label>
+                                <input type="text" id="residual" disabled>
+                            </section>
+                        </form>
+
+                        <table id="tablePayment">
+
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>تاريخ الدفعات</th>
+                                    <th>الدفعة الشهرية</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody">
+                            </tbody>
+
+                        </table>
+                    </section>
 
                     <section class="pay-det">
                         <form class="pay-by-visa">

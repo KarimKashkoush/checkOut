@@ -39,7 +39,8 @@ ul {
 }
 
 input,
-button {
+button, 
+select {
     color: var(--main-color);
     font-family: "Cairo", sans-serif;
     outline: none;
@@ -678,6 +679,76 @@ button {
 .pay2 input[type="submit"].active {
     background-color: #86c2ce;
     cursor: pointer;
+}
+
+
+.payment-data {
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+}
+.payment-data form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.payment-data form > section {
+    width: calc((100% / 3) - 10px);
+}
+
+.payment-data form > section:first-child {
+    width: 100%;
+}
+
+.payment-data form > section input, 
+select {
+    border: 1px solid var(--border-color);
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    font-size: 16px;
+    outline: none;
+}
+
+.payment-data form > section label{
+    display: block;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+@media (max-width: 650px) {
+    .payment-data form > section {
+        width: calc((100% / 2) - 10px);
+    }
+}
+
+@media (max-width: 450px) {
+    .payment-data form > section {
+        width: 100%;
+    }
+}
+
+#tablePayment {
+    margin-top: 15px;
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+#tablePayment thead {
+    background-color: #2f5961;
+    color: #fff;
+}
+
+#tablePayment tbody tr:nth-child(even) {
+    background-color: #86c2ce;
+}
+
+td {
+    padding-inline: 10px;
 }
 /* End Main */
 
