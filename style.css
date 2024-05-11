@@ -756,19 +756,6 @@ td {
     border-radius: 50px;
 }
 
-/* End Main */
-
-/* Form Validation */
-.error {
-    border-color: #f55157 !important;
-}
-
-.success {
-    border-color: #2196f3 !important;
-}
-
-
-
 .wrapper {
 
     width: 100%;
@@ -817,4 +804,15 @@ td {
 
         }
     }
+}
+
+/* End Main */
+
+/* Form Validation */
+.error {
+    border-color: #f55157 !important;
+}
+
+.success {
+    border-color: #2196f3 !important;
 }
