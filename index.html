@@ -8,6 +8,46 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
+<style>
+    .list,
+    .list--clear {
+
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .list {
+
+        flex-wrap: wrap;
+    }
+
+    .list--brands {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+
+    }
+
+    .list--brands li {
+        color: #c4c4c4;
+        display: inline-block;
+        font-size: 14px;
+        margin: 0 5px;
+
+    }
+
+    .list--brands li img {
+        display: inline-block;
+        height: auto;
+        opacity: .4;
+        vertical-align: middle;
+        width: 15px;
+
+    }
+</style>
 
 <body>
 
@@ -17,12 +57,10 @@
         <section class="container">
             <section class="details-page">
                 <section class="image">
-                    <a href="index.html"><img
-                            src="https://cdn.salla.sa/xpxep/G1eHyibUU47O3gFsoeow5mvbL0Ln6ZkaSrBE0p1N.png"
-                            alt="image"></a>
+                    <a href="/"><img src="{{asset('assets/images/'.$setting->logo)}}" alt="image"></a>
                 </section>
                 <section>
-                    <h2>مرحبا بك, Karim Kashkoush</h2>
+                    <h2>مرحبا بك </h2>
                     <p> <a href="#">اي جي ستور</a> <span>/</span> <a href="#">سلة المشتريات</a> <span>/</span>
                         <span>إتمام الطلب</span>
                     </p>
@@ -62,7 +100,17 @@
     </section>
     <!-- نهاية رأس الصفحة -->
     <!-- End Header -->
+    @php
+    $total=0;
 
+    if(session('cart'))
+    {
+    foreach(session('cart') as $id => $details)
+    {
+    $total += $details['price'] * $details['quantity'];
+    }
+    }
+    @endphp
     <!-- Start request -->
     <!-- بداية الطلب -->
     <section class="request">
@@ -71,7 +119,7 @@
                 <ul>
                     <li>
                         <h4>ملخص السلة</h4>
-                        <p><span class="total">19999</span> ر.س</p> <!-- Total -->
+                        <p><span class="total">{{$total}}</span> ر.س</p> <!-- Total -->
                     </li>
                     <li>
                         <h4>تكلفة الشحن</h4>
@@ -278,14 +326,19 @@
                     </section>
 
                     <section class="pay-det">
-                        <form class="pay-by-visa">
-                            <input type="hidden" id="personalName2" name="personalName2" placeholder="الاسم" disabled>
+                        <form class="pay-by-visa" method="post" action="store_makePayment">
+                            @csrf
+                            <input type="hidden" id="methodPayment1" name="methodPayment1">
 
-                            <input type="hidden" id="firstPayment2" name="firstPayment2" value="1000 ر.س" disabled>
+                            <input type="hidden" id="installmentBy2" name="installmentBy2">
 
-                            <input type="hidden" id="monthlyPayment2" name="monthlyPayment2" disabled>
+                            <input type="hidden" id="personalName2" name="personalName2" placeholder="الاسم">
 
-                            <input type="hidden" id="residual2" name="residual2" disabled>
+                            <input type="hidden" id="firstPayment2" name="firstPayment2" value="1000 ر.س">
+
+                            <input type="hidden" id="monthlyPayment2" name="monthlyPayment2">
+
+                            <input type="hidden" id="residual2" name="residual2">
 
                             <input type="hidden" id="country2" name="country2" placeholder="الدولة">
 
@@ -302,27 +355,44 @@
 
                             <section class="input-section card-number">
                                 <label for="cardNumber">رقم البطاقة</label>
-                                <input type="number" name="cardNumber" id="cardNumber" placeholder="رقم البطاقة">
+                                <input type="number" name="cardNumber" id="cardNumber" placeholder="رقم البطاقة"
+                                    maxlength="16"
+                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    type="number" maxlength="16">
                                 <span class="errorMassege"></span>
                             </section>
 
                             <section class="input-section">
                                 <label for="exp">تاريخ الانتهاء</label>
                                 <section class="exp">
-                                    <input type="number" placeholder="السنة" id="year" required>
-                                    <input type="number" name="exp" id="exp" placeholder="/" disabled>
-                                    <input type="number" placeholder="الشهر" id="month" required>
+                                    <input type="number" placeholder="السنة" name="year" id="year" required
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="2">
+                                    <input type="number" id="exp" placeholder="/" disabled>
+                                    <input type="number" placeholder="الشهر" name="month" id="month" require
+                                        oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                        type="number" maxlength="2">
                                 </section>
                                 <span class="errorMassege"></span>
                             </section>
 
                             <section class="input-section">
                                 <label for="cvv">رمز التحقق (cvv)</label>
-                                <input type="number" name="cvv" id="cvv" placeholder="رمز التحقق (cvv)">
+                                <input
+                                    oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                    type="number" maxlength="3" name="cvv" id="cvv" placeholder="رمز التحقق (cvv)">
                                 <span class="errorMassege"></span>
                             </section>
 
                             <input type="submit" value="دفع" id="payBtn">
+
+                            <ul class="list list--brands">
+                                <li>تسوق إلكتروني آمن 100%</li>
+                                <li><img src="./secure-payment.svg"></li>
+                                <li><img src="./secure-payment-02.svg"></li>
+                                <li><img src="./secure-payment-03.svg"></li>
+                            </ul>
+
                         </form>
                         <section class="pay-by-trans">
                             <section class="bank-acount">
@@ -344,14 +414,20 @@
                                 <h6>يجب ارفاق صوره من ايصال التحويل البنكي واسم الذي قام بالتحويل حتى يتم قبول الطلب
                                 </h6>
                             </section>
+
+
                             <form class="pay2">
-                                <input type="hidden" id="personalName3" name="personalName" disabled>
+                                <input type="hidden" id="methodPayment2" name="methodPayment2">
 
-                                <input type="hidden" id="firstPayment3" name="firstPayment3" value="1000 ر.س" disabled>
+                                <input type="hidden" id="installmentBy3" name="installmentBy3">
 
-                                <input type="hidden" id="monthlyPayment3" name="monthlyPayment3" disabled>
+                                <input type="hidden" id="personalName3" name="personalName">
 
-                                <input type="hidden" id="residual3" name="residual3" disabled>
+                                <input type="hidden" id="firstPayment3" name="firstPayment3" value="1000 ر.س">
+                                
+                                <input type="hidden" id="monthlyPayment3" name="monthlyPayment3">
+
+                                <input type="hidden" id="residual3" name="residual3">
 
                                 <input type="hidden" id="country3" name="country3" placeholder="الدولة">
 
@@ -374,7 +450,7 @@
                                 <label for="image">ارفاق صورة لايصال التحويل</label>
                                 <div class="wrapper">
                                     <div class="file-upload">
-                                        <input type="file" id="image"/>
+                                        <input type="file" id="image" />
                                         <i class="fa fa-arrow-up"></i>
                                     </div>
                                 </div>
@@ -389,6 +465,14 @@
         </section>
     </section>
     <!-- نهاية معلومات الشحن والدفع -->
+
+    <!-- Top Alert -->
+    <section class="top-alert">
+        <p>لتتمكن من الدفع بواسطة Apple Pay يجب عليك استخدام متصفح سفاري </p>
+        <button onclick="copyURL()" id="copyLink">انسخ الرابط</button>
+
+        <button id="closeAlert"><i class="fa-solid fa-xmark"></i></button>
+    </section>
 
     <script src="main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

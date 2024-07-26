@@ -18,6 +18,9 @@ let valid1 = false,
     valid6 = false;
 
 let country2 = document.getElementById("country2"),
+    methodPayment1 = document.getElementById("methodPayment1"),
+    methodPayment2 = document.getElementById("methodPayment2"),
+    trans = document.getElementsByName("trans"),
     City2 = document.getElementById("City2"),
     neighborhood2 = document.getElementById("neighborhood2"),
     street2 = document.getElementById("street2"),
@@ -38,7 +41,21 @@ let country2 = document.getElementById("country2"),
     payForm2 = document.querySelector(".pay-by-trans"),
     payBtn = document.getElementById("payBtn"),
     pay2Btn = document.querySelector(".pay2-btn"),
-    acountTransferName = document.getElementById("name");
+    acountTransferName = document.getElementById("name"),
+    imageTrans = document.getElementById("imageTrans");
+
+let installmentBy = document.getElementById("installmentBy");
+let installmentBy2 = document.getElementById("installmentBy2");
+let installmentBy3 = document.getElementById("installmentBy3");
+let firstPayment = document.getElementById("firstPayment");
+let monthlyPayment2 = document.getElementById("monthlyPayment2");
+let residual2 = document.getElementById("residual2");
+let monthlyPayment3 = document.getElementById("monthlyPayment3");
+let residual3 = document.getElementById("residual3");
+let monthlyPayment = document.getElementById("monthlyPayment");
+let residual = document.getElementById("residual");
+let tableMonthlyPayment = document.getElementById("tablePayment")
+
 
 // Stop any form
 function stopForm(event) {
@@ -63,6 +80,8 @@ let setError = (ele, errorMa) => {
     ele.classList.remove("success")
     ele.classList.add("error")
 }
+
+
 
 // Start Timer
 let hours = 24,
@@ -338,6 +357,34 @@ payForm.onchange = () => {
     } else {
         payBtn.classList.remove("active")
     }
+
+    for (let i = 0; i < trans.length; i++) {
+        if (trans[i].checked) {
+            methodPayment1.value = trans[i].value;
+            break;
+        }
+    }
+
+    if (installmentBy.value == "نقدا") {
+        installmentBy.value = null;
+    }
+
+    installmentBy2.value = installmentBy.value;
+}
+
+payForm2.onchange = () => {
+    for (let i = 0; i < trans.length; i++) {
+        if (trans[i].checked) {
+            methodPayment2.value = trans[i].value;
+            break;
+        }
+    }
+
+    if (installmentBy.value == "نقدا") {
+        installmentBy.value = null;
+    }
+
+    installmentBy3.value = installmentBy.value;
 }
 
 payBtn.onclick = () => {
@@ -364,14 +411,14 @@ trnasInputs.forEach((i) => {
 let btn = document.querySelectorAll(".section-title");
 
 // if (valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
-    btn.forEach((i) => {
-        i.onclick = () => {
-            let parent = i.parentElement;
-            parent.classList.toggle("active");
-            let ele = parent.querySelector(".content")
-            ele.classList.toggle("active")
-        }
-    })
+btn.forEach((i) => {
+    i.onclick = () => {
+        let parent = i.parentElement;
+        parent.classList.toggle("active");
+        let ele = parent.querySelector(".content")
+        ele.classList.toggle("active")
+    }
+})
 // }
 
 // End Open & Close Sections
@@ -385,7 +432,7 @@ let acountTransferNameCheck = acountTransferName.onchange = () => {
     } else {
         setSuccess(acountTransferName)
         nameValid = true;
-        if (!nameValid && valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
+        if (nameValid && valid1 && valid2 && valid3 && valid4 && valid5 && valid6) {
             pay2Btn.classList.add("active");
         }
     }
@@ -396,20 +443,13 @@ pay2Btn.onclick = (e) => {
     if (!(nameValid && valid1 && valid2 && valid3 && valid4 && valid5 && valid6)) {
         e.preventDefault(e)
         pay2Btn.classList.remove("active");
+    } else {
+        pay2Btn.classList.add("active");
     }
 }
 
 
 
-let installmentBy = document.getElementById("installmentBy");
-let firstPayment = document.getElementById("firstPayment");
-let monthlyPayment2 = document.getElementById("monthlyPayment2");
-let residual2 = document.getElementById("residual2");
-let monthlyPayment3 = document.getElementById("monthlyPayment3");
-let residual3 = document.getElementById("residual3");
-let monthlyPayment = document.getElementById("monthlyPayment");
-let residual = document.getElementById("residual");
-let tableMonthlyPayment = document.getElementById("tablePayment")
 
 if (total >= 1000) {
     for (let i = 1; i < 25; i++) {
@@ -481,3 +521,28 @@ if (total >= 1000) {
     firstPayment.parentElement.style.display = "none";
     tableMonthlyPayment.style.display = "none";
 }
+
+let closeAlert = document.getElementById("closeAlert");
+let copyLink = document.getElementById("copyLink");
+
+closeAlert.onclick = () => {
+    let parent = closeAlert.parentElement.style.display = "none";
+}
+
+function copyURL() {
+    var currentURL = window.location.href;
+
+    var tempInput = document.createElement("input");
+    tempInput.value = currentURL;
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+    document.execCommand("copy");
+
+    document.body.removeChild(tempInput);
+
+    copyLink.innerHTML = "تم نسخ الرابط"
+}
+
+
+

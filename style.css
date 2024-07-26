@@ -763,50 +763,85 @@ td {
     display: flex;
     align-items: center;
     justify-content: center;
+}
 
+.wrapper .file-upload {
 
-    .file-upload {
+    height: 200px;
+    width: 200px;
+    border-radius: 100px;
+    position: relative;
 
-        height: 200px;
-        width: 200px;
-        border-radius: 100px;
-        position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    border: 4px solid #FFFFFF;
+    overflow: hidden;
+    background-image: linear-gradient(to bottom, #2f5961 50%, #FFFFFF 50%);
+    background-size: 100% 200%;
+    transition: all 1s;
+    color: #FFFFFF;
+    font-size: 100px;
+}
 
-        border: 4px solid #FFFFFF;
-        overflow: hidden;
-        background-image: linear-gradient(to bottom, #2f5961 50%, #FFFFFF 50%);
-        background-size: 100% 200%;
-        transition: all 1s;
-        color: #FFFFFF;
-        font-size: 100px;
+.wrapper .file-upload input[type='file'] {
+    height: 200px;
+    width: 200px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+}
 
-        input[type='file'] {
+.wrapper .file-upload:hover {
+    background-position: 0 -100%;
+    color: #2f5961;
 
-            height: 200px;
-            width: 200px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            cursor: pointer;
-
-        }
-
-        &:hover {
-
-            background-position: 0 -100%;
-
-            color: #2f5961;
-
-        }
-    }
 }
 
 /* End Main */
+
+.top-alert {
+    background-color: #d2ac5c;
+    color: #444;
+    padding: 5px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+}
+
+.top-alert p {
+    flex: 3;
+}
+
+.top-alert button {
+    background-color: transparent;
+    border: 1px solid #4444;
+    padding: 4px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+
+.top-alert :hover {
+    background-color: #fafafa2d;
+}
+
+.top-alert i {
+    font-size: 16px;
+}
+
 
 /* Form Validation */
 .error {
